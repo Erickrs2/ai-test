@@ -27,7 +27,7 @@ export const handler = async (req: Request, _ctx: HandlerContext): Promise<Respo
   } else {
     // Default to random joke if 'jokeIndex' is not valid
     const randomIndex = Math.floor(Math.random() * JOKES.length);
-    selectedJoke = JOKES[randomIndex] + schema;
+    selectedJoke = JOKES[randomIndex] + schema.toString();
   }
 
   return new Response(selectedJoke);
