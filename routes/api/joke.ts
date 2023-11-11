@@ -14,10 +14,12 @@ const JOKES = [
   "An SEO expert walked into a bar, pub, inn, tavern, hostelry, public house.",
 ];
 
-export const handler = (req: Request, _ctx: HandlerContext): Response => {
+export const handler = async (req: Request, _ctx: HandlerContext): Promise<Response>=> {
   const url = new URL(req.url);
   const jokeIndex = url.searchParams.get("jokeIndex");
   let selectedJoke;
+
+  const schema = await req.json();
   
   // Check if 'jokeIndex' is a valid number and within the range of JOKES array
   if (jokeIndex !== null && !isNaN(+jokeIndex) && +jokeIndex >= 0 && +jokeIndex < JOKES.length) {
@@ -25,7 +27,7 @@ export const handler = (req: Request, _ctx: HandlerContext): Response => {
   } else {
     // Default to random joke if 'jokeIndex' is not valid
     const randomIndex = Math.floor(Math.random() * JOKES.length);
-    selectedJoke = JOKES[randomIndex];
+    selectedJoke = JOKES[randomIndex] + schema;
   }
 
   return new Response(selectedJoke);

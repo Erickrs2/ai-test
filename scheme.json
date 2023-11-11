@@ -1,0 +1,63 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Get a joke",
+      "description": "Retrieves a specific joke.",
+      "version": "v1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://ai-test.deno.dev/api"
+      }
+    ],
+    "paths": {
+      "/joke": {
+        "post": {
+          "description": "Get a specific joke based on a number",
+          "operationId": "GetCurrentJoke",
+          "parameters": [
+            {
+              "name": "jokeIndex",
+              "in": "query",
+              "description": "An index to search for the specific joke",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestCompletionRequestSchema"
+                }
+              }
+            },
+            "required": true
+          },
+          "deprecated": false
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "RequestCompletionRequestSchema": {
+            "properties": {
+                "model": {
+                    "type": "string",
+                    "title": "name of the user",
+                    "description": "name of the user talking"
+                }
+                
+            },
+            "type": "object",
+            "required": [
+                "model"
+            ],
+            "title": "RequestCompletionRequestSchema"
+        }
+     }
+      
+    }
+  }
