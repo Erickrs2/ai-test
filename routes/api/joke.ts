@@ -23,11 +23,11 @@ export const handler = async (req: Request, _ctx: HandlerContext): Promise<Respo
   
   // Check if 'jokeIndex' is a valid number and within the range of JOKES array
   if (jokeIndex !== null && !isNaN(+jokeIndex) && +jokeIndex >= 0 && +jokeIndex < JOKES.length) {
-    selectedJoke = JOKES[+jokeIndex] + schema.user.toString();
+    selectedJoke = JOKES[+jokeIndex] + " " + schema.user;
   } else {
     // Default to random joke if 'jokeIndex' is not valid
     const randomIndex = Math.floor(Math.random() * JOKES.length);
-    selectedJoke = JOKES[randomIndex] + schema.user.toString();
+    selectedJoke = JOKES[randomIndex] + " " + schema.user;
   }
 
   return new Response(selectedJoke);
